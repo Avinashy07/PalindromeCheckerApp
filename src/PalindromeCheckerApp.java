@@ -1,40 +1,36 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args){
 
-        System.out.println("Welcome to Palindro Checker App - UC4");
-        System.out.println("---------------------------------------");
+        System.out.println("Welcome to Palindrome Checker App - UC5 (Stack Based)");
+        System.out.println("-----------------------------------------------------");
 
-        // Declare and initialize the input string
-        String input = "radar";
+        // Input string to check (change this to test other inputs)
+        String input = "madam";
 
-        // Convert the string into a character array
-        char[] chars = input.toCharArray();
+        System.out.println("Input String: " + input);
 
-        // Initialize pointers
-        int start = 0;
-        int end = chars.length - 1;
+        // Create a stack of Characters
+        Stack<Character> stack = new Stack<>();
 
-        // Assume palindrome initially
-        boolean isPalindrome = true;
-
-        // Two-pointer comparison loop
-        while (start < end) {
-            if (chars[start] != chars[end]) {
-                isPalindrome = false;
-                break;
-            }
-            start++;
-            end--;
+        // Push all characters of the input string into the stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
         }
 
-        // Display results
-        System.out.println("Input String: " + input);
-        if (isPalindrome) {
+        // Pop characters from stack and build reversed string
+        StringBuilder reversed = new StringBuilder();
+        while (!stack.isEmpty()) {
+            reversed.append(stack.pop());
+        }
+
+        System.out.println("Reversed String (from Stack): " + reversed);
+
+        // Check if input equals reversed string
+        if (input.equals(reversed.toString())) {
             System.out.println("Result: The string is a PALINDROME.");
         } else {
             System.out.println("Result: The string is NOT a palindrome.");
         }
-
     }
 
 }
