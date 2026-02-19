@@ -1,26 +1,39 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args){
-        System.out.println("Welcome to plaindrome checker ");
-        System.out.println("version : 1.0");
-        System.out.println("system instalized successfully");
 
-        String word = "madam";
-        boolean ispalindrome =true;
-        // Variable to store reversed string
-       for(int i=0;i<word.length()/2;i++){
-            if(word.charAt(i)!=word.charAt(word.length()-1-i)){
-                ispalindrome=false;
+        System.out.println("Welcome to Palindrome Checker App - UC4");
+        System.out.println("---------------------------------------");
+
+        // Declare and initialize the input string
+        String input = "radar";
+
+        // Convert the string into a character array
+        char[] chars = input.toCharArray();
+
+        // Initialize pointers
+        int start = 0;
+        int end = chars.length - 1;
+
+        // Assume palindrome initially
+        boolean isPalindrome = true;
+
+        // Two-pointer comparison loop
+        while (start < end) {
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
                 break;
-
-           }
+            }
+            start++;
+            end--;
         }
-        // Check if original and reversed strings are equal
-        if (ispalindrome) {
-            System.out.println("The word \"" + word + "\" is a Palindrome.");
+
+        // Display results
+        System.out.println("Input String: " + input);
+        if (isPalindrome) {
+            System.out.println("Result: The string is a PALINDROME.");
         } else {
-            System.out.println("The word \"" + word + "\" is NOT a Palindrome.");
+            System.out.println("Result: The string is NOT a palindrome.");
         }
-
 
     }
 
