@@ -1,7 +1,7 @@
 public class PalindromeCheckerApp {
     public static void main(String[] args){
 
-        System.out.println("Welcome to Palindrome Checker App - UC4");
+        System.out.println("Welcome to Palindro Checker App - UC4");
         System.out.println("---------------------------------------");
 
         // Declare and initialize the input string
