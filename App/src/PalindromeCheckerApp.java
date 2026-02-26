@@ -2,35 +2,40 @@ import java.util.Scanner;
 
 public class PalindromeCheckerApp {
 
-    // Node class for Singly Linked List
-    public static boolean isPalindrome(String input, int start, int end) {
+    public static boolean isPalindrome(String input) {
 
-        // Base Condition: If pointers cross or meet
-        if (start >= end) {
+        if (input == null || input.length() == 0) {
             return true;
         }
 
-        // If characters do not match
-        if (input.charAt(start) != input.charAt(end)) {
-            return false;
+        // Step 1: Normalize string
+        // Convert to lowercase and remove all spaces
+        input = input.toLowerCase().replaceAll("\\s+", "");
+
+        // Step 2: Apply palindrome logic (Two Pointer Technique)
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
         }
 
-        // Recursive call for next inner characters
-        return isPalindrome(input, start + 1, end - 1);
+        return true;
     }
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("===== UC9: Recursive Palindrome Checker =====");
+        System.out.println("===== UC10: Case-Insensitive & Space-Ignored Palindrome =====");
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        // Normalize input (optional but recommended)
-        input = input.toLowerCase().replaceAll("[^a-z0-9]", "");
-
-        boolean result = isPalindrome(input, 0, input.length() - 1);
+        boolean result = isPalindrome(input);
 
         if (result) {
             System.out.println("Result: The given string is a Palindrome.");
