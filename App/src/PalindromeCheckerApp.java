@@ -50,4 +50,5 @@ public class PalindromeCheckerApp {
 
         scanner.close();
     }
+    //grhd
 }
