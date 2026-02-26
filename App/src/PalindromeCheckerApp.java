@@ -1,17 +1,27 @@
 import java.util.*;
+import java.util.*;
 
-// Strategy Interface
-interface PalindromeStrategy {
-    boolean checkPalindrome(String input);
-}
+public class PalindromeCheckerApp {
 
-// Stack Strategy
-class StackStrategy implements PalindromeStrategy {
-
-    public boolean checkPalindrome(String input) {
-
+    // 1️⃣ Two-Pointer Approach
+    public static boolean twoPointer(String input) {
         input = input.toLowerCase().replaceAll("[^a-z0-9]", "");
+        int start = 0;
+        int end = input.length() - 1;
 
+        while (start < end) {
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+
+    // 2️⃣ Stack Approach
+    public static boolean stackMethod(String input) {
+        input = input.toLowerCase().replaceAll("[^a-z0-9]", "");
         Stack<Character> stack = new Stack<>();
 
         for (char ch : input.toCharArray()) {
@@ -23,18 +33,12 @@ class StackStrategy implements PalindromeStrategy {
                 return false;
             }
         }
-
         return true;
     }
-}
 
-// Deque Strategy
-class DequeStrategy implements PalindromeStrategy {
-
-    public boolean checkPalindrome(String input) {
-
+    // 3️⃣ Deque Approach
+    public static boolean dequeMethod(String input) {
         input = input.toLowerCase().replaceAll("[^a-z0-9]", "");
-
         Deque<Character> deque = new LinkedList<>();
 
         for (char ch : input.toCharArray()) {
@@ -46,60 +50,41 @@ class DequeStrategy implements PalindromeStrategy {
                 return false;
             }
         }
-
         return true;
     }
-}
-
-// Context Class
-class PalindromeContext {
-
-    private PalindromeStrategy strategy;
-
-    public PalindromeContext(PalindromeStrategy strategy) {
-        this.strategy = strategy;
-    }
-
-    public boolean execute(String input) {
-        return strategy.checkPalindrome(input);
-    }
-}
-
-// Main Class (MUST match file name)
-public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("===== UC12: Strategy Pattern Palindrome Checker =====");
-        System.out.println("1. Stack Strategy");
-        System.out.println("2. Deque Strategy");
-        System.out.print("Enter choice (1 or 2): ");
-
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // clear buffer
-
+        System.out.println("===== UC13: Performance Comparison =====");
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        PalindromeStrategy strategy;
+        // Measure Two Pointer
+        long start1 = System.nanoTime();
+        boolean result1 = twoPointer(input);
+        long end1 = System.nanoTime();
 
-        if (choice == 1) {
-            strategy = new StackStrategy();
-        } else {
-            strategy = new DequeStrategy();
-        }
+        // Measure Stack
+        long start2 = System.nanoTime();
+        boolean result2 = stackMethod(input);
+        long end2 = System.nanoTime();
 
-        PalindromeContext context = new PalindromeContext(strategy);
+        // Measure Deque
+        long start3 = System.nanoTime();
+        boolean result3 = dequeMethod(input);
+        long end3 = System.nanoTime();
 
-        boolean result = context.execute(input);
+        System.out.println("\nResults:");
+        System.out.println("Two-Pointer Result: " + result1 +
+                " | Time: " + (end1 - start1) + " ns");
 
-        if (result) {
-            System.out.println("Result: The given string is a Palindrome.");
-        } else {
-            System.out.println("Result: The given string is NOT a Palindrome.");
-        }
+        System.out.println("Stack Method Result: " + result2 +
+                " | Time: " + (end2 - start2) + " ns");
+
+        System.out.println("Deque Method Result: " + result3 +
+                " | Time: " + (end3 - start3) + " ns");
 
         scanner.close();
     }
