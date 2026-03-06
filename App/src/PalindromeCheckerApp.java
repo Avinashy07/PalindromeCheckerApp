@@ -3,7 +3,6 @@ import java.util.*;
 
 public class PalindromeCheckerApp {
 
-    // 1️⃣ Two-Pointer Approach
     public static boolean twoPointer(String input) {
         input = input.toLowerCase().replaceAll("[^a-z0-9]", "");
         int start = 0;
@@ -19,7 +18,6 @@ public class PalindromeCheckerApp {
         return true;
     }
 
-    // 2️⃣ Stack Approach
     public static boolean stackMethod(String input) {
         input = input.toLowerCase().replaceAll("[^a-z0-9]", "");
         Stack<Character> stack = new Stack<>();
@@ -36,7 +34,6 @@ public class PalindromeCheckerApp {
         return true;
     }
 
-    // 3️⃣ Deque Approach
     public static boolean dequeMethod(String input) {
         input = input.toLowerCase().replaceAll("[^a-z0-9]", "");
         Deque<Character> deque = new LinkedList<>();
